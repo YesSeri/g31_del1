@@ -1,7 +1,8 @@
+package game;
 import java.util.Random;
 
 public class Dice{
-	int throw_dice(){
+	public int throw_dice(){
 		Random r = new Random();
 		return r.nextInt(6) + 1;
 	}
