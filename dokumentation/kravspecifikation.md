@@ -31,3 +31,5 @@
 
 4. & 5. Summen af terningernes værdier lægges til ens point. Den første at nå 40 points vinder.
 * Starter man på 0 pointe?
+5. Den første at nå 40 points vinder.
+   * Det er lidt unfair regler, fordi at den der starter har en kæmpe fordel. 

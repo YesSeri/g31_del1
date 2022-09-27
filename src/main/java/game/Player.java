@@ -2,13 +2,18 @@ package game;
 
 import gui_fields.GUI_Player;
 
-public class Player {
+class Player {
     private int points = 0;
-    private String name;
-    private GUI_Player gui_player;
-    public Player(String name) {
+    final private String name;
+    final private GUI_Player guiPlayer;
+
+    Player(String name) {
         this.name = name;
-         this.gui_player = new GUI_Player(name, points);
+        this.guiPlayer = new GUI_Player(name, 0);
+    }
+
+    public GUI_Player getGuiPlayer() {
+        return guiPlayer;
     }
 
     public int getPoints() {
@@ -16,15 +21,19 @@ public class Player {
     }
 
     public void addPoints(int points) {
-        this.points += points;
-        gui_player.setBalance(this.points);
+        setPoints(this.points + points);
     }
 
     public String toString() {
         return this.name + "score: " + getPoints();
     }
 
-    public String getName() {
-        return name;
+    private void setPoints(int points) {
+        this.points = points;
+        guiPlayer.setBalance(this.points);
+    }
+
+    public void reset() {
+        setPoints(0);
     }
 }

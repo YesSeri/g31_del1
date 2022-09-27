@@ -1,53 +1,63 @@
 package game;
 
 public class Game {
-    private Player player_1;
-    private Player player_2;
-    private Dice dice_1;
-    private Dice dice_2;
-    private boolean player_1_turn = true;
-    private int current_turn = 1;
+    final private Player player1 = new Player("Player 1");
+    final private Player player2 = new Player("Player 2");
+    final private GUIHandler guiHandler = new GUIHandler();
+    final private Cup cup = new Cup();
+    private boolean player1Turn = true;
+    private int current_turn = 0;
 
     public Game() {
-        this.player_1 = new Player();
-        this.player_2 = new Player();
-        this.dice_1 = new Dice();
-        this.dice_2 = new Dice();
+        guiHandler.addPlayers(player1.getGuiPlayer(), player2.getGuiPlayer());
     }
+//   The rules are:
+//   1. The game is played with two players.
+//   2. Each player has a turn to roll the dice.
+//   3. The player rolls the dice and the score gets added to their sum.
+//   4. First one to 40 points wins.
 
 
-    private int get_sum_of_dice(int dice_value_1, int dice_value_2) {
-        return dice_value_1 + dice_value_2;
+    public void start() {
+        do {
+            while (player1.getPoints() < 40 && player2.getPoints() < 40) {
+                if (player1Turn) {
+                    current_turn++;
+                }
+                cup.roll();
+                Player current_player = player1Turn ? player1 : player2;
+                guiHandler.showMessage("Turn " + current_turn + "\nRoll dice!");
+                int[] dice = cup.get_dice();
+                guiHandler.setDice(dice[0], dice[1]);
+                current_player.addPoints(cup.getSum());
+                player1Turn = !player1Turn;
+            }
+            if (player1.getPoints() > player2.getPoints()) {
+                guiHandler.showMessage("Player 1 wins!");
+            } else {
+                guiHandler.showMessage("Player 2 wins!");
+            }
+            restart_game();
+        } while (guiHandler.playAgain());
+
     }
 
-    private boolean is_same_value(int dice_value_1, int dice_value_2) {
-        return dice_value_1 == dice_value_2;
+    private void restart_game() {
+        player1Turn = true;
+        current_turn = 0;
+        player1.reset();
+        player2.reset();
     }
 
-    // add value of two dices to the player whose turn it is.
-    private void play_round() {
-        int dice_value_1 = this.dice_1.throw_dice();
-        int dice_value_2 = this.dice_2.throw_dice();
-        int sum = dice_value_1 + dice_value_2;
-        if (player_1_turn) {
-            player_1.addPoints(sum);
-        } else {
-            player_2.addPoints(sum);
-        }
-        player_1_turn = !player_1_turn;
-    }
-
-    public void play_game() {
-        while (player_1.getPoints() < 40 && player_2.getPoints() < 40) {
-            play_round();
-            current_turn++;
-            System.out.println("Turn " + current_turn + ":\nPlayer 1: " + player_1.getPoints() + "\nPlayer 2: " + player_2.getPoints());
-        }
-    }
 
     public static void main(String[] args) {
         Game game = new Game();
-        System.out.println(game);
-        game.play_game();
+        game.start();
     }
 }
+
+//   OPTIONAL
+//   1. Spilleren mister alle sine point hvis spilleren slår to 1'ere.
+//   2. Spilleren får en ekstra tur hvis spilleren slår to ens.
+//   3. Spilleren kan vinde spillet ved at slå to 6'ere, hvis spilleren også i forrige kast slog to 6'ere uanset om det er på ekstrakast eller i forrige tur.
+//   4. Spilleren skal slå to ens for at vinde spillet, efter at man har opnået 40 point.
