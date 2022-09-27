@@ -30,14 +30,14 @@ Project Encoding: UTF-8
 
 Opret et projekt med navnet 06_del1 (vigtigt at 06 udskiftes med jeres gruppenummer)
 Det er altid dårlig stil at bruge default-pakken. Opret derfor følgende pakker spil og test hvor I placerer jeres klasser.
-Husk at i IOOuterActive, ligesom i de fleste andre firmaer, er attributter private. Derfor skal der være public get- og set metoder hvis attributter skal kunne tilgås udefra. Vi tror også vi får brug for en `getSum():int` metode, som giver summen af øjnene på de to terninger og en `getEns():boolean` metode, som fortæller, hvorvidt de to terninger viser samme værdi .
+Husk at i IOOuterActive, ligesom i de fleste andre firmaer, er attributter private. Derfor skal der være public get- og set metoder hvis attributter skal kunne tilgås udefra. Vi tror også vi får brug for en `getSum():int` metode, som giver summen af øjnene på de to terninger og en `getEns():boolean` metode, som fortæller, hvorvidt de to terninger viser samme værdi.
 Vi forudser, at vi skal bruge noget tilfældighedsgenerering, og der kan I enten bruge metoden `nextInt(int n)` på et objekt af klassen java.util.Random eller metoden `random()` på klassen java.lang.Math. I kan læse i Java API’et hvordan metoderne fungerer.
 Vi har kigget lidt på GUI'en, og der er en metode `setDice(int, int)`, der placerer to terninger på en spilleplade med de angivne værdier.
 Kunden vil gerne se resultatet af et kast med det samme. Det betyder oversat til vores sprog, at det ikke må tage mere end 333 millisekunder. Vi har testet GUI'en, og det tager ca. 600 ms første gang man kalder `setDice`, men det ignorerer vi, da det de efterfølgende gange kun tager ca. 2 ms.
-Versionsstyring
+
+### Versionsstyring
 Kunden har bedt om mulighed for at kunne inspicere koden og udviklingen i koden. Derfor skal I i jeres aflevering inkludere et link til jeres github repo. De vil gerne kunne tjekke den seneste fungerende kode ud fra master-branchen, lav derfor ændringer som ikke er kørt og testet i en development-branch. Det skal kunne ses af historien på github at alle gruppens medlemmer har committet et eller andet.
-Test
+
+### Test
 Kunden har bedt om en test. Vi vil foreslå, at I optæller antallet af forekomster for hver mulig værdi af summen. Optæl desuden antallet af kast, hvor terningerne er ens. Kontrollér at resultaterne stemmer overens med de teoretiske sandsynligheder.
 
-
-         /
