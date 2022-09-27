@@ -23,7 +23,7 @@ public class DiceTest {
         int[] dice_numbers = new int[6];
 
         for (int i = 0; i < 1000; i++) {
-            cup.roll_cup();
+            cup.roll();
             int[] dice = cup.get_dice();
             int die1_val = dice[0];
             int die2_val = dice[1];
@@ -46,7 +46,7 @@ public class DiceTest {
     private boolean test_average_face_values(Cup cup) {
         int sum = 0;
         for (int i = 0; i < 1000; i++) {
-            cup.roll_cup();
+            cup.roll();
             sum += cup.getSum();
         }
 
@@ -63,7 +63,7 @@ public class DiceTest {
         int equal = 0;
 
         for (int i = 0; i < 1000; i++) {
-            cup.roll_cup();
+            cup.roll();
             if (cup.is_equal()) {
                 equal++;
             }

@@ -36,7 +36,7 @@ public class Cup {
         return die1.getFaceValue() == die2.getFaceValue();
     }
 
-    public void roll_cup() {
+    public void roll() {
         this.die1.throw_dice();
         this.die2.throw_dice();
     }
