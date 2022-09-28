@@ -4,6 +4,7 @@ import game.Cup;
 
 public class DiceTest {
 
+    Cup cup = new Cup();
     double acceptableVariation = 0.15;
 
     // Test the dice 1000 times and see if they are within normal parameters.
@@ -13,7 +14,7 @@ public class DiceTest {
     // 15 % acceptable variation means 333 * 15 % = 50. 333 - 50 = 283, 333 + 50 = 383.
 
 
-    private boolean testDistributionFaceValues(Cup cup) {
+    private boolean testDistributionFaceValues() {
 
         // diceNumbers[0] is dice face value 1, diceNumbers[1] is dice face value 2, etc.
         // We add one each time we get the value mentioned.
@@ -25,7 +26,7 @@ public class DiceTest {
         for (int i = 0; i < 1000; i++) {
             cup.roll();
             int[] dice = cup.getDice();
-            int die1 =dice[0];
+            int die1 = dice[0];
             int die2 = dice[1];
             diceNumbers[die1 - 1] += 1;
             diceNumbers[die2 - 1] += 1;
@@ -43,7 +44,7 @@ public class DiceTest {
     // Test 2
     // The average value of a die is 3.5. 3.5 * 2 = 7. We sum the total value of the dices and divide by 1000 to get the average value of the dices per roll.
     // The result should be approx. 7.
-    private boolean testAverageFaceValues(Cup cup) {
+    private boolean testAverageFaceValues() {
         int sum = 0;
         for (int i = 0; i < 1000; i++) {
             cup.roll();
@@ -59,7 +60,7 @@ public class DiceTest {
 
     // Test 3
     // The chance that the dice have the same value is 1/6. So we expect it to happen 1000/6 = 166.667 times.
-    private boolean testEqualFaceValue(Cup cup) {
+    private boolean testEqualFaceValue() {
         int equal = 0;
 
         for (int i = 0; i < 1000; i++) {
@@ -76,14 +77,13 @@ public class DiceTest {
         return true;
     }
 
-    private boolean testDice() {
-        Cup cup = new Cup();
-        return testAverageFaceValues(cup) && testDistributionFaceValues(cup) && testEqualFaceValue(cup);
+    private boolean runDiceTests() {
+        return testAverageFaceValues() && testDistributionFaceValues() && testEqualFaceValue();
     }
 
     public static void main(String[] args) {
-        DiceTest dt = new DiceTest();
-        boolean testResult = dt.testDice();
+        DiceTest diceTester = new DiceTest();
+        boolean testResult = diceTester.runDiceTests();
         if (testResult) {
             System.out.println("Tests passed.");
         } else {
