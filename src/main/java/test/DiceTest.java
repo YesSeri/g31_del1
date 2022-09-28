@@ -4,7 +4,7 @@ import game.Cup;
 
 public class DiceTest {
 
-    double acceptable_variation = 0.15;
+    double acceptableVariation = 0.15;
 
     // Test the dice 1000 times and see if they are within normal parameters.
     // Test 1
@@ -13,27 +13,27 @@ public class DiceTest {
     // 15 % acceptable variation means 333 * 15 % = 50. 333 - 50 = 283, 333 + 50 = 383.
 
 
-    private boolean test_distribution_face_values(Cup cup) {
+    private boolean testDistributionFaceValues(Cup cup) {
 
-        // dice_numbers[0] is dice face value 1, dice_numbers[1] is dice face value 2, etc.
+        // diceNumbers[0] is dice face value 1, diceNumbers[1] is dice face value 2, etc.
         // We add one each time we get the value mentioned.
-        // So if we get 3 and 5 as dice value, we add 1 to dice_numbers[2] and dice_numbers[4].
+        // So if we get 3 and 5 as dice value, we add 1 to diceNumbers[2] and diceNumbers[4].
         // The array will contain how many times each value has occurred.
 
-        int[] dice_numbers = new int[6];
+        int[] diceNumbers = new int[6];
 
         for (int i = 0; i < 1000; i++) {
             cup.roll();
-            int[] dice = cup.get_dice();
-            int die1_val = dice[0];
-            int die2_val = dice[1];
-            dice_numbers[die1_val - 1] += 1;
-            dice_numbers[die2_val - 1] += 1;
+            int[] dice = cup.getDice();
+            int die1 =dice[0];
+            int die2 = dice[1];
+            diceNumbers[die1 - 1] += 1;
+            diceNumbers[die2 - 1] += 1;
         }
 
-        System.out.println("Number of times each side occurred:\n" + "1:" + dice_numbers[0] + "\n2:" + dice_numbers[1] + "\n3:" + dice_numbers[2] + "\n4:" + dice_numbers[3] + "\n5:" + dice_numbers[4] + "\n6:" + dice_numbers[5]);
-        for (int side : dice_numbers) {
-            if (side < 333 * (1 - acceptable_variation) || side > 333 * (1 + acceptable_variation)) {
+        System.out.println("Number of times each side occurred:\n" + "1:" + diceNumbers[0] + "\n2:" + diceNumbers[1] + "\n3:" + diceNumbers[2] + "\n4:" + diceNumbers[3] + "\n5:" + diceNumbers[4] + "\n6:" + diceNumbers[5]);
+        for (int side : diceNumbers) {
+            if (side < 333 * (1 - acceptableVariation) || side > 333 * (1 + acceptableVariation)) {
                 return false;
             }
         }
@@ -43,7 +43,7 @@ public class DiceTest {
     // Test 2
     // The average value of a die is 3.5. 3.5 * 2 = 7. We sum the total value of the dices and divide by 1000 to get the average value of the dices per roll.
     // The result should be approx. 7.
-    private boolean test_average_face_values(Cup cup) {
+    private boolean testAverageFaceValues(Cup cup) {
         int sum = 0;
         for (int i = 0; i < 1000; i++) {
             cup.roll();
@@ -59,7 +59,7 @@ public class DiceTest {
 
     // Test 3
     // The chance that the dice have the same value is 1/6. So we expect it to happen 1000/6 = 166.667 times.
-    private boolean test_equal_face_value(Cup cup) {
+    private boolean testEqualFaceValue(Cup cup) {
         int equal = 0;
 
         for (int i = 0; i < 1000; i++) {
@@ -70,24 +70,24 @@ public class DiceTest {
         }
 
         System.out.println("Equal: " + equal);
-        if (equal < 166.667 * (1 - acceptable_variation) || equal > 166.667 * (1 + acceptable_variation)) {
+        if (equal < 166.667 * (1 - acceptableVariation) || equal > 166.667 * (1 + acceptableVariation)) {
             return false;
         }
         return true;
     }
 
-    private boolean test_dice() {
+    private boolean testDice() {
         Cup cup = new Cup();
-        return test_average_face_values(cup) && test_distribution_face_values(cup) && test_equal_face_value(cup);
+        return testAverageFaceValues(cup) && testDistributionFaceValues(cup) && testEqualFaceValue(cup);
     }
 
     public static void main(String[] args) {
         DiceTest dt = new DiceTest();
-        boolean test_result = dt.test_dice();
-        if (test_result) {
-            System.out.println("Test passed.");
+        boolean testResult = dt.testDice();
+        if (testResult) {
+            System.out.println("Tests passed.");
         } else {
-            System.out.println("Test failed.");
+            System.out.println("Tests failed.");
         }
     }
 }

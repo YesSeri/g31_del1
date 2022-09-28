@@ -13,33 +13,23 @@ class Player {
     private int points = 0;
     final private String name;
     final private GUI_Player guiPlayer;
-    private LastCup lastCup;
+    private Cup prevCup;
 
     Player(String name) {
         this.name = name;
         this.guiPlayer = new GUI_Player(name, 0);
         // We initiate it to an irrelevant value the first time.
-        this.lastCup = new LastCup(1, 2);
+        this.prevCup = new Cup(1, 2);
     }
 
-    boolean lastCupIsTwoSixes() {
-        return lastCup.isTwoSixes();
+    boolean prevTurnTwoSixes(){
+        return prevCup.getSum() == 12;
     }
 
-    void setLastCup(int die1, int die2) {
-        this.lastCup = new LastCup(die1, die2);
+    void setPrevCup(int die1, int die2) {
+        this.prevCup = new Cup(die1, die2);
     }
 
-    private class LastCup extends Cup {
-
-        LastCup(int die1, int die2) {
-            super(die1, die2);
-        }
-
-        private boolean isTwoSixes() {
-            return isEqualFaceValue() && get_dice()[0] == 6;
-        }
-    }
 
 
     public GUI_Player getGuiPlayer() {
