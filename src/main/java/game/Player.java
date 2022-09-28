@@ -39,7 +39,7 @@ class Player {
         guiPlayer.setBalance(this.points);
     }
 
-    public void reset() {
+    public void resetPoints() {
         setPoints(0);
     }
 }

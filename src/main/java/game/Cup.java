@@ -43,7 +43,7 @@ public class Cup {
     }
 
 
-    public boolean is_equal() {
+    public boolean is_equal_face_value() {
         return die1.getFaceValue() == die2.getFaceValue();
     }
 

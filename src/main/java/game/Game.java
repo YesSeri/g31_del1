@@ -6,7 +6,7 @@ public class Game {
     final private GUIHandler guiHandler = new GUIHandler();
     final private Cup cup = new Cup();
     private boolean player1Turn = true;
-    private int current_turn = 0;
+    private int current_round = 0;
 
     public Game() {
         guiHandler.addPlayers(player1.getGuiPlayer(), player2.getGuiPlayer());
@@ -22,14 +22,18 @@ public class Game {
         do {
             while (player1.getPoints() < 40 && player2.getPoints() < 40) {
                 if (player1Turn) {
-                    current_turn++;
+                    current_round++;
                 }
                 cup.roll();
-                Player current_player = player1Turn ? player1 : player2;
-                guiHandler.showMessage("Turn " + current_turn + "\nRoll dice!");
+                Player currentPlayer = player1Turn ? player1 : player2;
+                guiHandler.showMessage("Turn " + current_round + "\nRoll dice!");
                 int[] dice = cup.get_dice();
+                currentPlayer.addPoints(cup.getSum());
+                if (cup.is_equal_face_value() && cup.get_dice()[0]==1){
+                    currentPlayer.resetPoints();
+                }
                 guiHandler.setDice(dice[0], dice[1]);
-                current_player.addPoints(cup.getSum());
+
                 player1Turn = !player1Turn;
             }
             if (player1.getPoints() > player2.getPoints()) {
@@ -44,9 +48,9 @@ public class Game {
 
     private void restart_game() {
         player1Turn = true;
-        current_turn = 0;
-        player1.reset();
-        player2.reset();
+        current_round = 0;
+        player1.resetPoints();
+        player2.resetPoints();
     }
 
 
