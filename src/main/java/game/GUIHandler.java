@@ -28,6 +28,9 @@ public class GUIHandler {
     /**
      * Shows a message to the user.
      */
+    void showTurnMessage(int current_round, String name, int die1, int die2, String message) {
+        gui.showMessage("Turn " + current_round + "\n" + name + " got " + die1 + " and " + die2 + "!\n" + name + message);
+    }
     void showMessage(String message) {
         gui.showMessage(message);
     }

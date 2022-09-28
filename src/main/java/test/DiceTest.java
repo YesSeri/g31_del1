@@ -64,7 +64,7 @@ public class DiceTest {
 
         for (int i = 0; i < 1000; i++) {
             cup.roll();
-            if (cup.is_equal_face_value()) {
+            if (cup.isEqualFaceValue()) {
                 equal++;
             }
         }
@@ -89,6 +89,5 @@ public class DiceTest {
         } else {
             System.out.println("Test failed.");
         }
-
     }
 }

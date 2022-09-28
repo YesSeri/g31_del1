@@ -11,10 +11,34 @@ import gui_fields.GUI_Player;
  */
 class Player {
     private int points = 0;
+    final private String name;
     final private GUI_Player guiPlayer;
+    private LastCup lastCup;
 
     Player(String name) {
+        this.name = name;
         this.guiPlayer = new GUI_Player(name, 0);
+        // We initiate it to an irrelevant value the first time.
+        this.lastCup = new LastCup(1, 2);
+    }
+
+    boolean lastCupIsTwoSixes() {
+        return lastCup.isTwoSixes();
+    }
+
+    void setLastCup(int die1, int die2) {
+        this.lastCup = new LastCup(die1, die2);
+    }
+
+    private class LastCup extends Cup {
+
+        LastCup(int die1, int die2) {
+            super(die1, die2);
+        }
+
+        private boolean isTwoSixes() {
+            return isEqualFaceValue() && get_dice()[0] == 6;
+        }
     }
 
 
@@ -32,6 +56,7 @@ class Player {
 
     /**
      * We always set points through this method to make sure that the GUI gets updated when adding or removing points.
+     *
      * @param points - The current points the player has.
      */
     private void setPoints(int points) {
@@ -41,5 +66,9 @@ class Player {
 
     public void resetPoints() {
         setPoints(0);
+    }
+
+    public String getName() {
+        return name;
     }
 }

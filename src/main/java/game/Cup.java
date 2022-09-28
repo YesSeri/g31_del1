@@ -8,8 +8,18 @@ import java.util.Random;
 public class Cup {
     Random r = new Random();
 
-    final private Die die1 = new Die();
-    final private Die die2 = new Die();
+    private Die die1;
+    private Die die2;
+
+    public Cup() {
+        this.die1 = new Die();
+        this.die2 = new Die();
+    }
+
+    public Cup(int die1, int die2) {
+        this.die1 = new Die(die1);
+        this.die2 = new Die(die2);
+    }
 
 
     /**
@@ -26,8 +36,13 @@ public class Cup {
             throw_dice();
         }
 
+        public Die(int faceValue) {
+            this.faceValue = faceValue;
+        }
+
         public void throw_dice() {
             this.faceValue = r.nextInt(6) + 1;
+//            this.faceValue = 6;
         }
 
         public int getFaceValue() {
@@ -43,7 +58,7 @@ public class Cup {
     }
 
 
-    public boolean is_equal_face_value() {
+    public boolean isEqualFaceValue() {
         return die1.getFaceValue() == die2.getFaceValue();
     }
 
