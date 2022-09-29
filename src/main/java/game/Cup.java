@@ -1,5 +1,7 @@
 package game;
 
+import java.util.Random;
+
 /**
  * This is the cup class. It contains the dice and the sum of the dice.
  */
@@ -8,14 +10,41 @@ public class Cup {
     private Die die1 = new Die();
     private Die die2 = new Die();
 
-    public Cup(){
+    public class Die {
+        private int faceValue;
+        Random r = new Random();
+
+        /**
+         * We throw the dice and set the faceValue to the result in the constructor,
+         * to avoid having a non-random value or null pointer.
+         */
+        public Die() {
+            throwDice();
+        }
+
+        public Die(int faceValue) {
+            this.faceValue = faceValue;
+        }
+
+        public void throwDice() {
+            this.faceValue = r.nextInt(6) + 1;
+//            this.faceValue = 6;
+        }
+
+        public int getFaceValue() {
+            return faceValue;
+
+        }
+    }
+
+    public Cup() {
 
     }
+
     public Cup(int die1, int die2) {
         this.die1 = new Die(die1);
         this.die2 = new Die(die2);
     }
-
 
 
     /**

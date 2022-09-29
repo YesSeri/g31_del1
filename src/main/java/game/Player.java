@@ -22,14 +22,14 @@ class Player {
         this.prevCup = new Cup(1, 2);
     }
 
-    boolean prevTurnTwoSixes(){
+    boolean prevTurnTwoSixes() {
         return prevCup.getSum() == 12;
     }
 
+    // We do like this to ensure that the pointer is not to the same cup as the one the game uses.
     void setPrevCup(int die1, int die2) {
         this.prevCup = new Cup(die1, die2);
     }
-
 
 
     public GUI_Player getGuiPlayer() {
