@@ -81,7 +81,7 @@ public class DiceTest {
         }
 
         System.out.println("Equal: " + equal);
-        double acceptableVariation = 0.05;
+        double acceptableVariation = 0.15;
         if (equal < 166.667 * (1 - acceptableVariation) || equal > 166.667 * (1 + acceptableVariation)) {
             System.out.println("Distribution of equal face values is not within acceptable parameters. testEqualFaceValues() failed.");
             return false;

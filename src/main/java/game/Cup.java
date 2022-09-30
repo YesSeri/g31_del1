@@ -28,7 +28,6 @@ public class Cup {
 
         public void throwDice() {
             this.faceValue = r.nextInt(6) + 1;
-//            this.faceValue = 6;
         }
 
         public int getFaceValue() {

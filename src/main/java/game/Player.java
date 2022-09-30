@@ -13,22 +13,22 @@ class Player {
     private int points = 0;
     final private String name;
     final private GUI_Player guiPlayer;
-    private Cup prevCup;
+    private Cup previousCup;
 
     Player(String name) {
         this.name = name;
         this.guiPlayer = new GUI_Player(name, 0);
         // We initiate it to an irrelevant value the first time.
-        this.prevCup = new Cup(1, 2);
+        this.previousCup = new Cup(1, 2);
     }
 
     boolean prevTurnTwoSixes() {
-        return prevCup.getSum() == 12;
+        return previousCup.getSum() == 12;
     }
 
     // We do like this to ensure that the pointer is not to the same cup as the one the game uses.
-    void setPrevCup(int die1, int die2) {
-        this.prevCup = new Cup(die1, die2);
+    void setPreviousCup(int die1, int die2) {
+        this.previousCup = new Cup(die1, die2);
     }
 
 

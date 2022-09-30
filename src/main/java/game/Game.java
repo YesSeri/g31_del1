@@ -19,7 +19,7 @@ public class Game {
 //   3. The player rolls the dice and the score gets added to their sum.
 //   4. First one to 40 points wins.
 
-    private void showTurnMessage(Cup cup, int[] dice, boolean rollAgain) {
+    private void showTurnMessage(int[] dice, boolean rollAgain) {
         String name = currentPlayer.getName();
         Player otherPlayer = currentPlayer == player1 ? player2 : player1;
         String message = "Turn " + currentRound + "\n" + name + " got " + dice[0] + " and " + dice[1] + "!\n";
@@ -73,13 +73,13 @@ public class Game {
                 // If the player rolls two equal face values, they get another turn.
                 rollAgain = true;
             }
-            currentPlayer.setPrevCup(dice[0], dice[1]);
+            currentPlayer.setPreviousCup(dice[0], dice[1]);
             // If we have a winner, we break the game loop and show the winner.
             if (winner != null) {
                 break;
             }
             // If we have no winner we show the turn message and switch players.
-            showTurnMessage(cup, dice, rollAgain);
+            showTurnMessage(dice, rollAgain);
             if (rollAgain) {
                 continue;
             }
